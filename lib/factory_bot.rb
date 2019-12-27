@@ -50,14 +50,6 @@ require "factory_bot/internal"
 module FactoryBot
   Deprecation = ActiveSupport::Deprecation.new("6.0", "factory_bot")
 
-  def self.configuration
-    Internal.configuration
-  end
-
-  def self.reset_configuration
-    Internal.reset_configuration
-  end
-
   mattr_accessor :use_parent_strategy, instance_accessor: false
   self.use_parent_strategy = true
 
@@ -76,48 +68,20 @@ module FactoryBot
 
   class << self
     delegate :callbacks,
-             :callback_names,
              :constructor,
              :factories,
              :initialize_with,
-             :sequences,
              :skip_create,
-             :strategies,
              :to_create,
-             :traits,
              to: :configuration
 
-    delegate :factory_by_name,
-             :register_callback,
-             :register_default_callbacks,
-             :register_default_strategies,
-             :register_factory,
+    delegate :configuration,
              :register_sequence,
              :register_strategy,
-             :register_trait,
+             :reset_configuration,
              :rewind_sequences,
-             :sequence_by_name,
              :strategy_by_name,
-             :trait_by_name,
              to: Internal
-
-    attr_accessor :allow_class_lookup
-
-    deprecate :allow_class_lookup,
-              :allow_class_lookup=,
-              :callback_names,
-              :factory_by_name,
-              :register_callback,
-              :register_default_callbacks,
-              :register_default_strategies,
-              :register_factory,
-              :register_trait,
-              :sequence_by_name,
-              :sequences,
-              :strategies,
-              :trait_by_name,
-              :traits,
-              deprecator: Deprecation
   end
 end
 
