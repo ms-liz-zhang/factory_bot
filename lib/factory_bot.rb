@@ -48,7 +48,7 @@ require "factory_bot/version"
 require "factory_bot/internal"
 
 module FactoryBot
-  Deprecation = ActiveSupport::Deprecation.new("6.0", "factory_bot")
+  Deprecation = ActiveSupport::Deprecation.new("7.0", "factory_bot")
 
   mattr_accessor :use_parent_strategy, instance_accessor: false
   self.use_parent_strategy = true
